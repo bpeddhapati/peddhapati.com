@@ -81,15 +81,15 @@ body.on-home, body.on-home main { background:#000; }
 .side-nav .arr { font-size:.8em; color:var(--muted); }
 
 .hero-portrait { position:relative; margin:0; align-self:end; justify-self:start; height:100%; display:flex; align-items:flex-end; }
-.hero-portrait img {
+.hero-portrait .photo {
   display:block; height:min(94vh,1100px); height:min(94svh,1100px); width:auto; max-width:100%; object-fit:contain; object-position:bottom left;
   filter:grayscale(1) contrast(1.12) brightness(.92);
 }
 .hero-portrait { padding-bottom:4vh; padding-bottom:4svh; }
-.hero-portrait img { height:min(95.2vh,1125px); height:min(95.2svh,1125px); }
-.home .foot {
-  position:absolute; right:11%; bottom:calc(2rem + env(safe-area-inset-bottom)); margin:0; z-index:3; line-height:0;
-}
+.hero-portrait .photo { height:min(95.2vh,1125px); height:min(95.2svh,1125px); }
+/* logo pinned to the headshot's lower-right corner: it scales and moves with the photo */
+.portrait-wrap { position:relative; display:block; line-height:0; }
+.hero-portrait .logo { position:absolute; right:10%; bottom:4%; width:24%; z-index:2; }
 
 @media (max-width:1100px) { .side-nav .n { display:none; } .side-nav li { padding:0 1rem; } }
 
@@ -164,13 +164,11 @@ footer { padding:2rem 8% calc(2.5rem + env(safe-area-inset-bottom)); border-top:
 
 /* ---------- portrait / small screens ---------- */
 @media (max-width:820px) and (orientation:portrait) {
-  .home { grid-template-columns:1fr; grid-template-rows:auto auto; align-content:start; }
+  .home { grid-template-columns:1fr; grid-template-rows:auto auto; align-content:center; padding-bottom:4svh; }
   .hero-portrait { grid-row:1; justify-self:center; height:auto; margin-top:4.5rem; }
-  .hero-text { left:0; grid-row:2; align-self:start; justify-self:center; margin-top:1.5rem; padding:0 6% 6rem; }
-  .home .logo { width:min(152px,40vw); }
-  .hero-portrait { padding-bottom:0; margin-top:2.5rem; }
-  .hero-portrait img { height:min(60.6svh,562px); }
-  .home .foot { right:12%; bottom:calc(1.6rem + env(safe-area-inset-bottom)); }
+  .hero-text { left:0; grid-row:2; align-self:start; justify-self:center; margin-top:1.5rem; padding:0 6%; }
+  .hero-portrait { padding-bottom:0; margin-top:0; }
+  .hero-portrait .photo { height:min(60.6svh,562px); }
   .side-nav li { padding:0 .9rem; }
   .side-nav .n { display:none; }
   .bar .mark { letter-spacing:.28em; }
@@ -195,9 +193,7 @@ footer { padding:2rem 8% calc(2.5rem + env(safe-area-inset-bottom)); border-top:
   .side-nav a { font-size:.86rem; }
   .side-nav li { padding:0 .75rem; }
   .hero-text { padding-left:3%; }
-  .home .logo { width:104px; }
   .hero-portrait { padding-bottom:0; }
-  .home .foot { right:7%; bottom:1rem; }
   .grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:.75rem; }
   .tile .cap { min-height:2.2rem; padding:0 2.2rem; }
   .tile .ico { left:.7rem; width:1rem; height:1rem; }
@@ -231,9 +227,11 @@ footer { padding:2rem 8% calc(2.5rem + env(safe-area-inset-bottom)); border-top:
       </nav>
     </div>
     <figure class="hero-portrait">
-      <img src="portrait.webp" alt="Portrait of Bhaskar Peddhapati" width="923" height="1190">
+      <span class="portrait-wrap">
+        <img class="photo" src="portrait.webp" alt="Portrait of Bhaskar Peddhapati" width="923" height="1190">
+        <img class="logo" src="logo.png" alt="Bhaskar Peddhapati Photography logo">
+      </span>
     </figure>
-    <p class="foot"><img class="logo" src="logo.png" alt="Bhaskar Peddhapati logo"></p>
   </header>
 
   <!-- About -->
