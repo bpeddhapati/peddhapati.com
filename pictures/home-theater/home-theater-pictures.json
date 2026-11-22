@@ -2,13 +2,15 @@
   "photos": [
     { "file": "1-DSC_6336-Edited.jpg",  "caption": "The Finished Basement",   "group": "Our Previous Home" },
     { "file": "2-DSC_4882-Edited.jpg",  "caption": "Welcome to the Theatre",  "group": "Our Previous Home" },
-    { "file": "3-DSC_8576-Edited.jpg",  "caption": "Showtime",                "group": "Our Previous Home" },
+    { "file": "3-DSC_8576-Edited.jpg",  "caption": "Showtime!",                "group": "Our Previous Home" },
     { "file": "4-DSC_8573-Edited.jpg",  "caption": "Lights Up!",               "group": "Our Previous Home" },
 
     { "file": "11-DSC_7683-Edited.jpg", "caption": "Our New Theater: 4K HDR & Dolby Atmos",    "group": "Our Current Home" },
     { "file": "12-DSC_7633-Edited.jpg", "caption": "Showtime!",             "group": "Our Current Home" },
-    { "file": "13-DSC_7612-Edited.jpg", "caption": "From the other corner",       "group": "Our Current Home" },
+    { "file": "13-DSC_7612-Edited.jpg", "caption": "Lights Up!",       "group": "Our Current Home" },
+    { "file": "13.1-DSC_7615-Edited.jpg", "caption": "Front and center!",       "group": "Our Current Home" },
     { "file": "14-DSC_7670-Edited.jpg", "caption": "Best Row",     "group": "Our Current Home" },
-    { "file": "15-Home Theater Rack.jpg", "caption": "The Equipment Rack",    "group": "Our Current Home" }
+    { "file": "15-Home Theater Rack.jpg", "caption": "The Equipment Rack",    "group": "Our Current Home" },
+    { "file": "16-Home Theater Gear v1.jpg", "caption": "The Gear",    "group": "Our Current Home" }
   ]
 }
