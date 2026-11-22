@@ -168,7 +168,8 @@ footer { padding:2rem 8% calc(2.5rem + env(safe-area-inset-bottom)); border-top:
 /* ---------- portrait / small screens ---------- */
 @media (max-width:820px) and (orientation:portrait) {
   .home { grid-template-columns:1fr; grid-template-rows:auto auto; align-content:center; padding-bottom:4svh; }
-  .hero-portrait { grid-row:1; justify-self:center; height:auto; margin-top:4.5rem; }
+  /*.hero-portrait { grid-row:1; justify-self:center; height:auto; margin-top:4.5rem; } */
+  .hero-portrait { grid-row:1; justify-self:end; height:auto; margin-top:4.5rem; }
   .hero-text { left:0; grid-row:2; align-self:start; justify-self:center; margin-top:1.5rem; padding:0 6%; }
   .hero-portrait { padding-bottom:0; margin-top:0; }
   .hero-portrait .photo { height:min(60.6svh,562px); }
