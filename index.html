@@ -54,9 +54,10 @@ body.on-home, body.on-home main { background:#000; }
   padding:0 0 calc(15vh + 6rem) 6%;
   left:5vw; /* nudged toward the portrait */
 }
-/* logo sits bottom-right, where the copyright line was */
+/* logo watermark sits centred under the links */
 .home .logo {
-  display:block; width:clamp(136px,12vw,192px); height:auto; opacity:.9;
+  display:block; width:clamp(122px,10.8vw,173px); height:auto; opacity:.6;
+  margin-top:clamp(3rem,7vh,5rem);
   filter:drop-shadow(0 2px 6px rgba(0,0,0,.75));
 }
 .hero-name {
@@ -91,9 +92,7 @@ body.on-home, body.on-home main { background:#000; }
 }
 .hero-portrait { padding-bottom:4vh; padding-bottom:4svh; }
 .hero-portrait .photo { height:min(95.2vh,1125px); height:min(95.2svh,1125px); }
-/* logo pinned to the headshot's lower-right corner: it scales and moves with the photo */
 .portrait-wrap { position:relative; display:block; line-height:0; }
-.hero-portrait .logo { position:absolute; right:10%; bottom:4%; width:24%; z-index:2; }
 
 @media (max-width:1100px) { .side-nav li { padding:0 1rem; } }
 
@@ -175,6 +174,7 @@ footer { padding:2rem 8% calc(2.5rem + env(safe-area-inset-bottom)); border-top:
   .hero-portrait .photo { height:min(60.6svh,562px); }
   .side-nav li { padding:0 .9rem; }
   .hero-name { font-size:1.15rem; letter-spacing:.32em; padding-left:.32em; margin-bottom:1.2rem; }
+  .home .logo { width:108px; margin-top:2.5rem; }
   .bar .mark { letter-spacing:.28em; }
   .bar .close { letter-spacing:.28em; }
   .content { padding:3rem 8% 4rem; }
@@ -199,6 +199,7 @@ footer { padding:2rem 8% calc(2.5rem + env(safe-area-inset-bottom)); border-top:
   .side-nav li { padding:0 .75rem; }
   .hero-text { padding-left:3%; }
   .hero-portrait { padding-bottom:0; }
+  .home .logo { width:90px; margin-top:1.5rem; }
   .grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:.75rem; }
   .tile .cap { min-height:2.2rem; padding:0 2.2rem; }
   .tile .ico { left:.7rem; width:1rem; height:1rem; }
@@ -230,11 +231,11 @@ footer { padding:2rem 8% calc(2.5rem + env(safe-area-inset-bottom)); border-top:
           <li><a href="https://www.linkedin.com/in/peddhapati/" target="_blank" rel="noopener"><span class="t">LinkedIn</span><span class="arr" aria-hidden="true">↗</span></a></li>
         </ul>
       </nav>
+      <img class="logo" src="bp-logo.png" alt="Bhaskar Peddhapati Photography logo">
     </div>
     <figure class="hero-portrait">
       <span class="portrait-wrap">
         <img class="photo" src="bp-portrait.webp" alt="Portrait of Bhaskar Peddhapati" width="923" height="1190">
-        <img class="logo" src="bp-logo.png" alt="Bhaskar Peddhapati Photography logo">
       </span>
     </figure>
   </header>
