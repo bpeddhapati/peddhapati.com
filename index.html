@@ -128,9 +128,9 @@ h2 {
 
 /* album grid: photo tiles with a frosted caption band */
 #albums .wrap { max-width:1280px; }
-.grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1.25rem; }
+.grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1.625rem; }
 @media (max-width:1000px) { .grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
-@media (max-width:760px)  { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:.8rem; } }
+@media (max-width:760px)  { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.04rem; } }
 .tile {
   position:relative; display:block; aspect-ratio:16 / 9; overflow:hidden; text-decoration:none;
   background:linear-gradient(155deg,var(--c) 0%,color-mix(in srgb,var(--c) 50%,#000) 100%);
@@ -189,7 +189,7 @@ footer { padding:2rem 8% calc(2.5rem + env(safe-area-inset-bottom)); border-top:
 @media (max-width:560px) {
   .bar .mark { font-size:.64rem; letter-spacing:.22em; }
   .bar .close { font-size:.64rem; letter-spacing:.22em; }
-  .grid { grid-template-columns:min(100%,400px); justify-content:center; gap:1rem; }
+  .grid { grid-template-columns:min(100%,400px); justify-content:center; gap:1.3rem; }
   .tile .name { font-size:1.034rem; }
 }
 /* ---------- short landscape (phones on their side) ---------- */
@@ -201,7 +201,7 @@ footer { padding:2rem 8% calc(2.5rem + env(safe-area-inset-bottom)); border-top:
   .hero-text { padding-left:3%; }
   .hero-portrait { padding-bottom:0; }
   .home .logo { width:90px; margin-top:1.5rem; }
-  .grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:.75rem; }
+  .grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:.975rem; }
   .tile .cap { min-height:2.2rem; padding:0 2.2rem; }
   .tile .ico { left:.7rem; width:1rem; height:1rem; }
   .tile .name { font-size:.893rem; }
