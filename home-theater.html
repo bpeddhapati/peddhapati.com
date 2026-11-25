@@ -101,9 +101,6 @@ h2 {
 .group { margin:0 0 1.25rem; }
 .grid + .group { margin-top:3.5rem; }
 
-.status { color:var(--muted); font-size:.95rem; max-width:60ch; }
-.status code { color:var(--body); font-size:.9em; }
-
 .back { display:inline-block; margin-top:4rem; }
 footer { padding:2rem 8% calc(2.5rem + env(safe-area-inset-bottom)); border-top:1px solid var(--hair); text-align:right; }
 
@@ -164,7 +161,6 @@ footer { padding:2rem 8% calc(2.5rem + env(safe-area-inset-bottom)); border-top:
         <h2 id="ht-h">home theater.</h2>
         <p class="sub">Click any photo to view it full size.</p>
         <div id="gallery"></div>
-        <p class="status" id="status">Loading photos…</p>
         <a class="back" href="index.html">← Back</a>
       </div>
     </div>
@@ -182,43 +178,33 @@ footer { padding:2rem 8% calc(2.5rem + env(safe-area-inset-bottom)); border-top:
   <button class="lb-next" type="button" aria-label="Next photo">›</button>
 </div>
 
-<!-- Backup copy of home-theater-pictures.json, used only if that file can't be read.
-     The JSON file always wins when it loads, so it is the one to edit. -->
-<script type="application/json" id="photo-list">
-{
-  "photos": [
-    { "file": "1-DSC_6336-Edited.jpg",  "caption": "The Finished Basement",   "group": "Our Previous Home" },
-    { "file": "2-DSC_4882-Edited.jpg",  "caption": "Welcome to the Theatre",  "group": "Our Previous Home" },
-    { "file": "3-DSC_8576-Edited.jpg",  "caption": "Showtime",                "group": "Our Previous Home" },
-    { "file": "4-DSC_8573-Edited.jpg",  "caption": "Lights Up",               "group": "Our Previous Home" },
-
-    { "file": "11-DSC_7683-Edited.jpg", "caption": "4K HDR & Dolby Atmos",    "group": "Our Current Home" },
-    { "file": "12-DSC_7633-Edited.jpg", "caption": "The Bar Row",             "group": "Our Current Home" },
-    { "file": "13-DSC_7612-Edited.jpg", "caption": "From the Back Row",       "group": "Our Current Home" },
-    { "file": "14-DSC_7670-Edited.jpg", "caption": "Front Row Recliners",     "group": "Our Current Home" },
-    { "file": "15-Home Theater Rack.jpg", "caption": "The Equipment Rack",    "group": "Our Current Home" }
-  ]
-}
-</script>
-
 <script>
 document.querySelectorAll(".yr").forEach(function (el) { el.textContent = "© " + new Date().getFullYear(); });
 
 (function () {
-  /* Photos and captions come from home-theater-pictures.json:
-     { "photos": [ { "file": "name.jpg", "caption": "Text", "group": "Section" }, ... ] }
-     Shown in the order listed; "caption" and "group" are optional.
-     The page looks for the JSON in pictures/home-theater/ and in its own folder,
-     and loads each photo from the folder the JSON was found in. */
-  var JSON_NAME = "home-theater-pictures.json";
-  var FOLDERS = ["./pictures/home-theater/", "./"];
-  var IMG = /\.(jpe?g|png|webp|avif|gif)$/i;
+  /* Photos are shown in the order listed, from the folder below.
+     "caption" and "group" are optional; consecutive photos with the same
+     group are shown together under that heading. */
+  var FOLDER = "pictures/home-theater/";
+  var PHOTOS = [
+    { file: "1-DSC_6336-Edited.jpg",              caption: "The Finished Basement",                 group: "Our Previous Home" },
+    { file: "2-DSC_4882-Edited.jpg",              caption: "Welcome to the Theatre",                group: "Our Previous Home" },
+    { file: "3-DSC_8576-Edited.jpg",              caption: "Showtime!",                             group: "Our Previous Home" },
+    { file: "4-DSC_8573-Edited.jpg",              caption: "Lights Up!",                            group: "Our Previous Home" },
+    { file: "11-DSC_7683-Edited.jpg",             caption: "Our New Theater: 4K HDR & Dolby Atmos", group: "Our Current Home" },
+    { file: "12-DSC_7633-Edited.jpg",             caption: "Showtime!",                             group: "Our Current Home" },
+    { file: "13-DSC_7612-Edited.jpg",             caption: "Lights Up!",                            group: "Our Current Home" },
+    { file: "13.1-DSC_7615-Edited.jpg",           caption: "Front and center!",                     group: "Our Current Home" },
+    { file: "14-DSC_7670-Edited.jpg",             caption: "Best Row",                              group: "Our Current Home" },
+    { file: "15-Home Theater Rack.jpg",           caption: "The Equipment Rack",                    group: "Our Current Home" },
+    { file: "16-Home Theater Gear - Gray BG.jpg", caption: "The Gear",                              group: "Our Current Home" },
+    { file: "17-Home Theater Before n After.jpg", caption: "Before and After!",                     group: "Our Current Home" }
+  ];
 
   var gallery = document.getElementById("gallery");
-  var status = document.getElementById("status");
-  var photos = [];
-
-  function folderUrl(f) { return new URL(f, location.href).href; }
+  var photos = PHOTOS.map(function (p) {
+    return { src: FOLDER + encodeURIComponent(p.file), caption: p.caption || "", group: p.group || "" };
+  });
 
   var io = "IntersectionObserver" in window ? new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
@@ -277,61 +263,7 @@ document.querySelectorAll(".yr").forEach(function (el) { el.textContent = "© " 
     });
   }
 
-  /* Turn the JSON into photo entries, with each file resolved against `base`. */
-  function parse(data, base) {
-    var list = Array.isArray(data) ? data : (data.photos || data.files || data.pictures || []);
-    return list.map(function (item) {
-      return typeof item === "string" ? { file: item } : (item || {});
-    }).filter(function (item) {
-      return item.file && IMG.test(item.file);
-    }).map(function (item) {
-      return { src: new URL(encodeURIComponent(item.file), base).href, caption: item.caption || "", group: item.group || "" };
-    });
-  }
-
-  /* Try each folder in turn until the JSON is found. */
-  function findManifest(i) {
-    if (i >= FOLDERS.length) return Promise.reject(new Error("not found"));
-    var base = folderUrl(FOLDERS[i]);
-    return fetch(base + JSON_NAME, { cache: "no-store" }).then(function (r) {
-      if (!r.ok) throw new Error("HTTP " + r.status);
-      return r.json();
-    }).then(function (data) { return parse(data, base); })
-      .catch(function () { return findManifest(i + 1); });
-  }
-
-  /* Backup list in this page (see the bottom of the file). Used only when the JSON
-     can't be read, e.g. when the page is opened straight from disk (file://),
-     where browsers block reading JSON files. Picks whichever folder has the photos. */
-  function fromBackup() {
-    var el = document.getElementById("photo-list");
-    if (!el) return Promise.reject(new Error("no backup"));
-    var data = JSON.parse(el.textContent);
-    var first = parse(data, folderUrl(FOLDERS[0]))[0];
-    if (!first) return Promise.reject(new Error("empty backup"));
-    function probe(i) {
-      if (i >= FOLDERS.length) return Promise.reject(new Error("photos not found"));
-      var base = folderUrl(FOLDERS[i]);
-      var test = parse(data, base)[0].src;
-      return new Promise(function (ok, no) {
-        var im = new Image(); im.onload = ok; im.onerror = no; im.src = test;
-      }).then(function () { return parse(data, base); }, function () { return probe(i + 1); });
-    }
-    return probe(0);
-  }
-
-  function fail() {
-    status.innerHTML = "No photos found. Put <code>" + JSON_NAME + "</code> and the photos in " +
-      "<code>pictures/home-theater/</code> next to this page (or all in the same folder as this page)." +
-      (location.protocol === "file:" ? " This page was opened directly from disk; browsers block reading JSON files that way, so view it through your web server instead." : "");
-  }
-
-  findManifest(0).catch(fromBackup).then(function (list) {
-    photos = list;
-    if (!photos.length) throw new Error("none");
-    status.hidden = true;
-    render();
-  }).catch(fail);
+  render();
 
   /* ---------- lightbox ---------- */
   var lb = document.getElementById("lb");
