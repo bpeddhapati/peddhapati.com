@@ -52,7 +52,7 @@ body.on-home, body.on-home main { background:#000; }
   align-self:end; justify-self:center;
   display:flex; flex-direction:column; align-items:center;
   padding:0 0 calc(15vh + 6rem) 6%;
-  left:4vw; /* nudged toward the portrait */
+  left:5vw; /* nudged toward the portrait */
 }
 /* logo watermark sits centred under the links */
 .home .logo {
@@ -90,7 +90,7 @@ body.on-home, body.on-home main { background:#000; }
   display:block; height:min(94vh,1100px); height:min(94svh,1100px); width:auto; max-width:100%; object-fit:contain; object-position:bottom left;
   filter:grayscale(1) contrast(1.12) brightness(.92);
 }
-.hero-portrait { padding-bottom:4vh; padding-bottom:4svh; padding-left:3vw; /* shifts portrait right, widening the gap to the text */ }
+.hero-portrait { padding-bottom:4vh; padding-bottom:4svh; }
 .hero-portrait .photo { height:min(92.3vh,1091px); height:min(92.3svh,1091px); }
 .portrait-wrap { position:relative; display:block; line-height:0; }
 
@@ -171,7 +171,7 @@ footer { padding:2rem 8% calc(2.5rem + env(safe-area-inset-bottom)); border-top:
   /*.hero-portrait { grid-row:1; justify-self:center; height:auto; margin-top:4.5rem; } */
   .hero-portrait { grid-row:1; justify-self:end; height:auto; margin-top:4.5rem; }
   .hero-text { left:0; grid-row:2; align-self:start; justify-self:center; margin-top:1.5rem; padding:0 6%; }
-  .hero-portrait { padding-bottom:0; margin-top:0; padding-left:0; }
+  .hero-portrait { padding-bottom:0; margin-top:0; }
   .hero-portrait .photo { height:min(58.8svh,545px); }
   .side-nav li { padding:0 .9rem; }
   .hero-name { font-size:1.15rem; letter-spacing:.32em; padding-left:.32em; margin-bottom:1.2rem; }
